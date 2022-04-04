@@ -19,6 +19,6 @@ app.get('/',function(req,res){
     res.end(JSON.stringify(response));
 })
 
-const server = app.listen(5000,function(){
+const server = app.listen(process.env.PORT || 5000,function(){
     console.log('5000端口监听');
 })
