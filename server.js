@@ -2,10 +2,18 @@ const express = require('express')
 
 const app = express()
 
+app.use('/static', express.static('static'));
+
 var count = 0
 var startTime = new Date().getTime()
+var initStartTime = startTime
 
 app.get('/',function(req,res){
+    res.sendFile( __dirname + "/static/index.html" );
+})
+
+
+app.get('/getPlayInfo',function(req,res){
     count++
     var myDate = new Date()
     var res_string = 'count:'+count+', time: '+myDate.getHours()+':'+myDate.getMinutes()+':'+myDate.getSeconds()+'+'+myDate.getMilliseconds()
@@ -17,6 +25,17 @@ app.get('/',function(req,res){
     };
     console.log(response);
     res.end(JSON.stringify(response));
+})
+
+app.get('/forward5Minute',function(req,res){
+    startTime+=300000
+    res.send('nihao')
+})
+
+app.get('/backward5Minute',function(req,res){
+    startTime-=300000
+    res.send('nihao')
+
 })
 
 const server = app.listen(process.env.PORT || 5000,function(){
