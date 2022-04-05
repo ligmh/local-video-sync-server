@@ -15,6 +15,8 @@
         <div>
             <button onclick="buttonClickHandler1()">向前5分钟</button>
             <button onclick="buttonClickHandler2()">向后5分钟</button>
+            <br>
+            <button onclick="buttonClickHandler3()">暂停/继续</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -30,7 +32,6 @@
         }, 1000)
 
         function buttonClickHandler1() {
-            var currentTime = document.getElementById('current-time')
             axios.get('/forward')
                 .then(response => {
                     console.log(response.data)
@@ -40,8 +41,15 @@
         }
 
         function buttonClickHandler2() {
-            var currentTime = document.getElementById('current-time')
             axios.get('/backward')
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(err => console.log(err))
+        }
+
+        function buttonClickHandler3() {
+            axios.get('/pauseOrResume')
                 .then(response => {
                     console.log(response.data)
                 })
