@@ -18,17 +18,25 @@ app.get('/', function (req, res) {
 
 
 app.get('/pause', function (req, res) {
-    clearInterval(clock)
-    clock = null
-    console.log('paused');
+    if(clock){
+        clearInterval(clock)
+        clock = null
+        console.log('paused');
+    } else{
+        console.log('warning: already paused! ');
+    }
     res.send('pause success')
 })
 
 app.get('/resume', function (req, res) {
-    clock = setInterval(() => { // 开始计时
-        time++
-    }, 1000);
-    console.log('resumed');
+    if(!clock){
+        clock = setInterval(() => { // 开始计时
+            time++
+        }, 1000);
+        console.log('resumed');
+    } else {
+        console.log('warning: already playing! ');
+    }
     res.send('resume success')
 })
 
