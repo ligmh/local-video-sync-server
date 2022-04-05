@@ -6,7 +6,7 @@ app.use('/static', express.static('static'));
 
 var count = 0
 var time = 0 // 播放了多久了，单位是秒
-var startTime = new Date().getTime()
+var status = 0 // 0是暂停状态，1是播放状态
 
 var clock = setInterval(() => { // 开始计时
     time++
@@ -16,6 +16,17 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + "/static/index.html");
 })
 
+app.get('/getPlayInfo', function (req, res) {
+    count++
+    var response = {
+        "time": time,
+        "status": status,
+        "count": count,
+        "sysTime": (new Date()).getTime()
+    };
+    console.log(response);
+    res.end(JSON.stringify(response));
+})
 
 app.get('/pause', function (req, res) {
     if(clock){
@@ -52,17 +63,6 @@ app.get('/pauseOrResume', function (req, res) {
         console.log('paused');
     }
     res.send('success')
-})
-
-app.get('/getPlayInfo', function (req, res) {
-    count++
-    var response = {
-        "time": time,
-        "count": count,
-        "sysTime": (new Date()).getTime()
-    };
-    console.log(response);
-    res.end(JSON.stringify(response));
 })
 
 app.get('/forward', function (req, res) {
