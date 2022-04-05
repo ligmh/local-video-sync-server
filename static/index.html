@@ -31,8 +31,7 @@
 
         function buttonClickHandler1() {
             var currentTime = document.getElementById('current-time')
-            currentTime.innerHTML -= 300
-            axios.get('/forward5Minute')
+            axios.get('/forward')
                 .then(response => {
                     console.log(response.data)
 
@@ -42,8 +41,7 @@
 
         function buttonClickHandler2() {
             var currentTime = document.getElementById('current-time')
-            currentTime.innerHTML -= -300
-            axios.get('/backward5Minute')
+            axios.get('/backward')
                 .then(response => {
                     console.log(response.data)
                 })
