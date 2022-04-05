@@ -58,12 +58,12 @@ app.get('/getPlayInfo', function (req, res) {
 })
 
 app.get('/forward', function (req, res) {
-    time -= 300000
+    time -= 300
     res.send('success')
 })
 
 app.get('/backward', function (req, res) {
-    time += 300000
+    time += 300
     res.send('success')
 
 })
