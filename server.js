@@ -6,7 +6,9 @@ app.use('/static', express.static('static'));
 
 var count = 0
 var time = 0 // 播放了多久了，单位是秒
-var status = 0 // 0是暂停状态，1是播放状态
+const PAUSED = 0
+const PLAYING = 1
+var status = PLAYING // 0是暂停状态，1是播放状态
 
 var clock = setInterval(() => { // 开始计时
     time++
@@ -32,6 +34,7 @@ app.get('/pause', function (req, res) {
     if(clock){
         clearInterval(clock)
         clock = null
+        status = PAUSED
         console.log('paused');
     } else{
         console.log('warning: already paused! ');
@@ -44,6 +47,8 @@ app.get('/resume', function (req, res) {
         clock = setInterval(() => { // 开始计时
             time++
         }, 1000);
+        status = PLAYING
+
         console.log('resumed');
     } else {
         console.log('warning: already playing! ');
@@ -56,10 +61,12 @@ app.get('/pauseOrResume', function (req, res) {
         clock = setInterval(() => { // 开始计时
             time++
         }, 1000);
+        status = PLAYING
         console.log('resumed');
     } else {
         clearInterval(clock)
         clock = null
+        status = PAUSED
         console.log('paused');
     }
     res.send('success')
