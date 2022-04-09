@@ -23,6 +23,10 @@
             <button onclick="buttonClickHandler4()">向前5分钟</button>
             <button onclick="buttonClickHandler5()">向后5分钟</button>
         </div>
+        <div>
+            <input id="locationTime" type="text" />
+            <button onclick="buttonClickHandler6()">定位</button>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -72,6 +76,15 @@
 
         function buttonClickHandler5() {
             axios.get('/backward/300')
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(err => console.log(err))
+        }
+
+        function buttonClickHandler6() {
+            var locationTime = window.document.getElementById('locationTime').value
+            axios.get('/locateAt/'+locationTime)
                 .then(response => {
                     console.log(response.data)
                 })

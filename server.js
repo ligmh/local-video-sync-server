@@ -82,6 +82,11 @@ app.get('/backward/:gap', function (req, res) {
     res.send('success')
 })
 
+app.get('/locateAt/:time', function (req, res) {
+    time = Number.parseInt(req.params.time)
+    res.send('success')
+})
+
 const server = app.listen(process.env.PORT || 5000, function () {
     console.log('listening port 5000');
 })
