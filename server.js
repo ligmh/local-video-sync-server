@@ -72,23 +72,13 @@ app.get('/pauseOrResume', function (req, res) {
     res.send('success')
 })
 
-app.get('/forward/60', function (req, res) {
-    time -= 60
+app.get('/forward/:gap', function (req, res) {
+    time -= req.params.gap
     res.send('success')
 })
 
-app.get('/backward/60', function (req, res) {
-    time += 60
-    res.send('success')
-})
-
-app.get('/forward/300', function (req, res) {
-    time -= 300
-    res.send('success')
-})
-
-app.get('/backward/300', function (req, res) {
-    time += 300
+app.get('/backward/:gap', function (req, res) {
+    time -= -req.params.gap
     res.send('success')
 })
 
