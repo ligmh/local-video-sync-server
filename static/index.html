@@ -13,10 +13,15 @@
 
         当前观看到的时间：<span id="current-time"></span>s
         <div>
-            <button onclick="buttonClickHandler1()">向前5分钟</button>
-            <button onclick="buttonClickHandler2()">向后5分钟</button>
-            <br>
             <button onclick="buttonClickHandler3()">暂停/继续</button>
+        </div>
+        <div>
+            <button onclick="buttonClickHandler1()">向前1分钟</button>
+            <button onclick="buttonClickHandler2()">向后1分钟</button>
+        </div>
+        <div>
+            <button onclick="buttonClickHandler4()">向前5分钟</button>
+            <button onclick="buttonClickHandler5()">向后5分钟</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -32,7 +37,7 @@
         }, 1000)
 
         function buttonClickHandler1() {
-            axios.get('/forward')
+            axios.get('/forward/60')
                 .then(response => {
                     console.log(response.data)
 
@@ -41,7 +46,7 @@
         }
 
         function buttonClickHandler2() {
-            axios.get('/backward')
+            axios.get('/backward/60')
                 .then(response => {
                     console.log(response.data)
                 })
@@ -56,8 +61,22 @@
                 .catch(err => console.log(err))
         }
 
-        
+        function buttonClickHandler4() {
+            axios.get('/forward/300')
+                .then(response => {
+                    console.log(response.data)
 
+                })
+                .catch(err => console.log(err))
+        }
+
+        function buttonClickHandler5() {
+            axios.get('/backward/300')
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(err => console.log(err))
+        }
     </script>
 </body>
 

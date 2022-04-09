@@ -72,15 +72,24 @@ app.get('/pauseOrResume', function (req, res) {
     res.send('success')
 })
 
-app.get('/forward', function (req, res) {
+app.get('/forward/60', function (req, res) {
+    time -= 60
+    res.send('success')
+})
+
+app.get('/backward/60', function (req, res) {
+    time += 60
+    res.send('success')
+})
+
+app.get('/forward/300', function (req, res) {
     time -= 300
     res.send('success')
 })
 
-app.get('/backward', function (req, res) {
+app.get('/backward/300', function (req, res) {
     time += 300
     res.send('success')
-
 })
 
 const server = app.listen(process.env.PORT || 5000, function () {
