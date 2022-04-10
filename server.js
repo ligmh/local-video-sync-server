@@ -69,22 +69,22 @@ app.get('/pauseOrResume', function (req, res) {
         status = PAUSED
         console.log('paused');
     }
-    res.send('success')
+    res.send('pauseOrResume success')
 })
 
 app.get('/forward/:gap', function (req, res) {
     time -= req.params.gap
-    res.send('success')
+    res.send('forward success')
 })
 
 app.get('/backward/:gap', function (req, res) {
     time -= -req.params.gap
-    res.send('success')
+    res.send('backward success')
 })
 
 app.get('/locateAt/:time', function (req, res) {
     time = Number.parseInt(req.params.time)
-    res.send('success')
+    res.send('locating success')
 })
 
 const server = app.listen(process.env.PORT || 5000, function () {
