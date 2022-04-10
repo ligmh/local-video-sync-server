@@ -10,9 +10,11 @@ const PAUSED = 0
 const PLAYING = 1
 var status = PLAYING // 0是暂停状态，1是播放状态
 
-var clock = setInterval(() => { // 开始计时
+function ticToc(){
     time++
-}, 1000);
+}
+
+var interval1 = setInterval(ticToc, 1000);
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/static/index.html");
@@ -31,9 +33,10 @@ app.get('/getPlayInfo', function (req, res) {
 })
 
 app.get('/pause', function (req, res) {
-    if(clock){
-        clearInterval(clock)
-        clock = null
+    if(interval1){
+        time++
+        clearInterval(interval1)
+        interval1 = null
         status = PAUSED
         console.log('paused');
     } else{
@@ -43,12 +46,9 @@ app.get('/pause', function (req, res) {
 })
 
 app.get('/resume', function (req, res) {
-    if(!clock){
-        clock = setInterval(() => { // 开始计时
-            time++
-        }, 1000);
+    if(!interval1){
+        interval1 = setInterval(ticToc, 1000);
         status = PLAYING
-
         console.log('resumed');
     } else {
         console.log('warning: already playing! ');
@@ -57,15 +57,14 @@ app.get('/resume', function (req, res) {
 })
 
 app.get('/pauseOrResume', function (req, res) {
-    if(!clock){
-        clock = setInterval(() => { // 开始计时
-            time++
-        }, 1000);
+    if(!interval1){
+        time++
+        interval1 = setInterval(ticToc, 1000);
         status = PLAYING
         console.log('resumed');
     } else {
-        clearInterval(clock)
-        clock = null
+        clearInterval(interval1)
+        interval1 = null
         status = PAUSED
         console.log('paused');
     }
